@@ -1,0 +1,234 @@
+/* Estilos complementares ao Tailwind: componentes reutilizáveis e animações */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+::selection {
+  background: #7c3aed;
+  color: #fff;
+}
+
+/* Barra de rolagem personalizada */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0b0b12; }
+::-webkit-scrollbar-thumb { background: #2a2a3d; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+
+/* Navegação */
+.nav-link {
+  position: relative;
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+.nav-link:hover,
+.nav-link.is-active {
+  color: #fff;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #7c3aed, #22d3ee);
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+/* Efeito de transparência do menu fixo (classe aplicada via JS) */
+#navbar.is-scrolled {
+  background-color: rgba(11, 11, 18, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* Brilhos decorativos do hero */
+.glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.glow--brand {
+  width: 32rem;
+  height: 32rem;
+  top: -10rem;
+  left: -12rem;
+  background: #7c3aed;
+}
+.glow--accent {
+  width: 26rem;
+  height: 26rem;
+  bottom: -12rem;
+  right: -8rem;
+  background: #22d3ee;
+  opacity: 0.25;
+}
+
+/* Cards */
+.benefit-card,
+.feature-card,
+.testimonial-card {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(20, 20, 31, 0.6);
+  padding: 1.75rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.benefit-card:hover,
+.feature-card:hover,
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(124, 58, 237, 0.5);
+  box-shadow: 0 20px 40px -30px rgba(124, 58, 237, 0.9);
+}
+
+.icon-badge {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.9rem;
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  background: rgba(124, 58, 237, 0.12);
+  color: #a78bfa;
+  font-size: 1.05rem;
+}
+.feature-title {
+  margin-top: 1.25rem;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+}
+.feature-text {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.social-link {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  transition: all 0.2s ease;
+}
+.social-link:hover {
+  color: #fff;
+  border-color: rgba(124, 58, 237, 0.6);
+  background: rgba(124, 58, 237, 0.15);
+}
+
+/* Formulário */
+.form-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+.form-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(11, 11, 18, 0.8);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input::placeholder { color: #475569; }
+.form-input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
+}
+.form-input.is-invalid {
+  border-color: #f472b6;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.2);
+}
+.form-error {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  color: #f472b6;
+}
+
+/* Equalizador animado do mockup */
+#equalizer span {
+  display: block;
+  width: 6px;
+  height: 18px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+}
+#equalizer.is-playing span {
+  animation: bounce-bar 1s ease-in-out infinite;
+}
+#equalizer span:nth-child(1) { animation-delay: 0s; }
+#equalizer span:nth-child(2) { animation-delay: 0.15s; }
+#equalizer span:nth-child(3) { animation-delay: 0.3s; }
+#equalizer span:nth-child(4) { animation-delay: 0.45s; }
+#equalizer span:nth-child(5) { animation-delay: 0.6s; }
+#equalizer span:nth-child(6) { animation-delay: 0.75s; }
+#equalizer span:nth-child(7) { animation-delay: 0.9s; }
+
+@keyframes bounce-bar {
+  0%, 100% { height: 16px; }
+  50% { height: 64px; }
+}
+
+/* Animação de entrada por scroll (IntersectionObserver) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+#back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  #equalizer.is-playing span { animation: none; }
+}
