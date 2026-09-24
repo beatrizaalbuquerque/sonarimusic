@@ -18,18 +18,17 @@
   /* ---------- Menu mobile ---------- */
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
 
   function closeMenu() {
     mobileMenu.classList.add('hidden');
     menuToggle.setAttribute('aria-expanded', 'false');
-    menuIcon.className = 'fa-solid fa-bars';
+    menuToggle.textContent = 'Menu';
   }
 
   menuToggle.addEventListener('click', function () {
     const isOpen = !mobileMenu.classList.toggle('hidden');
     menuToggle.setAttribute('aria-expanded', String(isOpen));
-    menuIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    menuToggle.textContent = isOpen ? 'Fechar' : 'Menu';
   });
 
   mobileMenu.querySelectorAll('a').forEach(function (link) {
@@ -90,6 +89,7 @@
   const playIcon = document.getElementById('play-icon');
   const equalizer = document.getElementById('equalizer');
   const progressBar = document.getElementById('progress-bar');
+  const progressTrack = document.getElementById('progress-track') || progressBar.parentElement;
   const currentTime = document.getElementById('current-time');
   const audio = document.getElementById('demo-audio');
   const prevBtn = document.getElementById('prev-btn');
@@ -97,16 +97,23 @@
   const totalTime = document.getElementById('total-time');
   const trackTitle = document.getElementById('track-title');
   const trackArtist = document.getElementById('track-artist');
+  const volumeControl = document.getElementById('volume-control');
+  const volumeIcon = document.getElementById('volume-icon');
 
-  // Playlist (adapte caminhos se mover os arquivos)
   const playlist = [
     {
       src: 'assets/sound/fassounds-escape-your-love-upbeat-fashion-pop-dance-412230.mp3',
       title: 'Escape Your Love',
       artist: 'Fassounds'
+    },
+    {
+      src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      title: 'Night Pulse',
+      artist: 'SoundHelix'
     }
   ];
   let currentIndex = 0;
+  let isDragging = false;
 
   function loadTrack(index) {
     const item = playlist[index];
@@ -125,24 +132,50 @@
     }
   }
 
-  prevBtn.addEventListener('click', function () {
+  function setPlaybackUI(isPlaying) {
+    playIcon.className = isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    playBtn.setAttribute('aria-pressed', String(isPlaying));
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pausar música' : 'Reproduzir música');
+    equalizer.classList.toggle('is-playing', isPlaying);
+  }
+
+  function playTrack(index) {
     if (playlist.length === 0) return;
-    currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+    currentIndex = (index + playlist.length) % playlist.length;
     loadTrack(currentIndex);
-    audio.play().catch(() => {});
+
+    const playPromise = audio.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+      playPromise.catch(function () {
+        // autoplay pode ser bloqueado até o usuário interagir; o botão continua funcional
+      });
+    }
+  }
+
+  prevBtn.addEventListener('click', function () {
+    playTrack(currentIndex - 1);
   });
 
   nextBtn.addEventListener('click', function () {
-    if (playlist.length === 0) return;
-    currentIndex = (currentIndex + 1) % playlist.length;
-    loadTrack(currentIndex);
-    audio.play().catch(() => {});
+    playTrack(currentIndex + 1);
   });
 
   audio.addEventListener('loadedmetadata', function () {
     renderProgress();
     updateTotalTime();
   });
+
+  audio.addEventListener('ended', function () {
+    nextBtn.click();
+  });
+
+  volumeControl.addEventListener('input', function () {
+    audio.volume = Number(volumeControl.value);
+    updateVolumeUI();
+  });
+
+  audio.volume = Number(volumeControl.value);
+  updateVolumeUI();
 
   // load initial track
   loadTrack(currentIndex);
@@ -158,26 +191,68 @@
     const time = isFinite(audio.currentTime) ? audio.currentTime : 0;
     progressBar.style.width = dur > 0 ? (time / dur) * 100 + '%' : '0%';
     currentTime.textContent = formatTime(Math.floor(time));
+    if (dur > 0) totalTime.textContent = formatTime(Math.floor(dur));
   }
 
-  // Toggle play/pause using the real audio element
-  playBtn.addEventListener('click', function () {
+  function updateVolumeUI() {
+    const volume = Number(audio.volume || 0);
+    volumeControl.title = volume === 0 ? 'Mudo' : volume < 0.5 ? 'Volume baixo' : 'Volume alto';
+    if (volumeIcon) {
+      volumeIcon.className = volume === 0
+        ? 'fa-solid fa-volume-xmark text-sm'
+        : volume < 0.5
+          ? 'fa-solid fa-volume-low text-sm'
+          : 'fa-solid fa-volume-high text-sm';
+    }
+  }
+
+  function seekTrack(event) {
+    if (!audio || !audio.duration) return;
+    const rect = progressTrack.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const ratio = Math.min(Math.max(clickX / rect.width, 0), 1);
+    audio.currentTime = ratio * audio.duration;
+    renderProgress();
+  }
+
+  function togglePlayback() {
     if (!audio) return;
-    if (audio.paused) audio.play().catch(() => {});
-    else audio.pause();
+
+    if (audio.paused) {
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.catch(function () {
+          // autoplay bloqueado até o usuário interagir
+        });
+      }
+      return;
+    }
+
+    audio.pause();
+  }
+
+  playBtn.addEventListener('click', togglePlayback);
+
+  progressTrack.addEventListener('pointerdown', function (event) {
+    isDragging = true;
+    seekTrack(event);
+  });
+
+  window.addEventListener('pointermove', function (event) {
+    if (isDragging) seekTrack(event);
+  });
+
+  window.addEventListener('pointerup', function () {
+    isDragging = false;
   });
 
   // Keep UI in sync with audio state
   audio.addEventListener('play', function () {
-    playIcon.className = 'fa-solid fa-pause';
-    playBtn.setAttribute('aria-pressed', 'true');
-    equalizer.classList.add('is-playing');
+    setPlaybackUI(true);
   });
 
   audio.addEventListener('pause', function () {
-    playIcon.className = 'fa-solid fa-play';
-    playBtn.setAttribute('aria-pressed', 'false');
-    equalizer.classList.remove('is-playing');
+    setPlaybackUI(false);
   });
 
   audio.addEventListener('timeupdate', renderProgress);
@@ -185,6 +260,7 @@
 
   // initialize display if audio metadata is already available
   if (audio && audio.readyState >= 1) renderProgress();
+  setPlaybackUI(audio.paused);
 
   /* ---------- Formulário de contato ---------- */
   const form = document.getElementById('contact-form');

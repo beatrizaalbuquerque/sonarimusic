@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,7 +31,6 @@
     };
   </script>
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎧</text></svg>" />
 </head>
 
 <body class="bg-night font-body text-slate-200 antialiased">
@@ -40,16 +38,12 @@
   <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
       <a href="#hero" class="flex items-center gap-2 font-display text-xl font-extrabold text-white">
-        <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand to-accent">
-          <i class="fa-solid fa-headphones text-white"></i>
-        </span>
         Sonari
       </a>
 
       <ul class="hidden items-center gap-8 text-sm font-medium lg:flex">
         <li><a class="nav-link" href="#beneficios">Benefícios</a></li>
         <li><a class="nav-link" href="#funcionalidades">Funcionalidades</a></li>
-        <li><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
         <li><a class="nav-link" href="#contato">Contato</a></li>
       </ul>
 
@@ -58,7 +52,7 @@
       </a>
 
       <button id="menu-toggle" class="grid h-10 w-10 place-items-center rounded-lg border border-white/10 text-white lg:hidden" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
-        <i id="menu-icon" class="fa-solid fa-bars"></i>
+        Menu
       </button>
     </nav>
 
@@ -66,7 +60,6 @@
       <ul class="space-y-1 px-6 py-4 text-sm font-medium">
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#beneficios">Benefícios</a></li>
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#funcionalidades">Funcionalidades</a></li>
-        <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#depoimentos">Depoimentos</a></li>
         <li><a class="block rounded-lg px-3 py-2 hover:bg-white/5" href="#contato">Contato</a></li>
         <li><a class="mt-2 block rounded-full bg-gradient-to-r from-brand to-accent px-4 py-2.5 text-center font-semibold text-white" href="#contato">Ouvir Agora</a></li>
       </ul>
@@ -82,7 +75,7 @@
       <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:px-10">
         <div data-reveal>
           <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-accent">
-            <i class="fa-solid fa-wave-square"></i> Áudio sem perdas — qualidade superior
+            Áudio sem perdas — qualidade superior
           </span>
 
           <h1 class="mt-6 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -90,15 +83,15 @@
           </h1>
 
           <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg">
-            Música com alta fidelidade, playlists criadas para você e um radar de novos artistas.
+            Música com som bem feito, playlists que acompanham seu gosto e novas descobertas que fazem sentido.
           </p>
 
           <div class="mt-9 flex flex-wrap items-center gap-4">
             <a href="#contato" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand to-accent px-7 py-3.5 font-semibold text-white shadow-xl shadow-brand/30 transition hover:scale-105">
-              <i class="fa-solid fa-play"></i> Ouvir Agora
+              Ouvir Agora
             </a>
             <a href="#funcionalidades" class="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white transition hover:bg-white/5">
-              <i class="fa-solid fa-circle-info"></i> Conhecer o app
+              Conhecer o app
             </a>
           </div>
 
@@ -124,7 +117,6 @@
           <div class="relative rounded-[2rem] border border-white/10 bg-surface/90 p-6 shadow-2xl backdrop-blur">
             <div class="flex items-center justify-between text-xs text-slate-500">
               <span>Tocando agora</span>
-              <i class="fa-solid fa-ellipsis"></i>
             </div>
 
             <!-- Áudio de demonstração -->
@@ -138,19 +130,26 @@
             <h2 id="track-title" class="mt-5 font-display text-lg font-bold text-white">Ondas de Neon</h2>
             <p id="track-artist" class="text-sm text-slate-400">Coletivo Sonari</p>
 
-            <div class="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+            <div id="progress-track" class="mt-4 h-1.5 w-full cursor-pointer overflow-hidden rounded-full bg-white/10">
               <div id="progress-bar" class="h-full w-1/3 rounded-full bg-gradient-to-r from-brand to-accent"></div>
             </div>
             <div class="mt-2 flex justify-between text-[11px] text-slate-500">
               <span id="current-time">00:00</span><span id="total-time">00:00</span>
             </div>
 
-            <div class="mt-5 flex items-center justify-center gap-7 text-white">
-              <button id="prev-btn" class="text-slate-400 transition hover:text-white" aria-label="Faixa anterior"><i class="fa-solid fa-backward-step"></i></button>
-              <button id="play-btn" class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-brand to-accent shadow-lg shadow-brand/40 transition hover:scale-105" aria-label="Reproduzir" aria-pressed="false">
-                <i id="play-icon" class="fa-solid fa-play"></i>
-              </button>
-              <button id="next-btn" class="text-slate-400 transition hover:text-white" aria-label="Próxima faixa"><i class="fa-solid fa-forward-step"></i></button>
+            <div class="mt-5 flex items-center justify-between gap-3">
+              <div class="flex items-center justify-center gap-7 text-white">
+                <button id="prev-btn" class="text-slate-400 transition hover:text-white" aria-label="Faixa anterior"><i class="fa-solid fa-backward-step"></i></button>
+                <button id="play-btn" class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-brand to-accent shadow-lg shadow-brand/40 transition hover:scale-105" aria-label="Reproduzir" aria-pressed="false">
+                  <i id="play-icon" class="fa-solid fa-play"></i>
+                </button>
+                <button id="next-btn" class="text-slate-400 transition hover:text-white" aria-label="Próxima faixa"><i class="fa-solid fa-forward-step"></i></button>
+              </div>
+
+              <div class="flex items-center gap-2 text-slate-300">
+                <i id="volume-icon" class="fa-solid fa-volume-high text-sm"></i>
+                <input id="volume-control" type="range" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" class="h-1.5 w-20 cursor-pointer accent-violet-500" />
+              </div>
             </div>
           </div>
         </div>
@@ -162,33 +161,29 @@
       <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="mx-auto max-w-2xl text-center" data-reveal>
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Por que Sonari</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Feito para quem vive a música</h2>
-          <p class="mt-4 text-slate-400">Quatro diferenciais que colocam a experiência de ouvir acima de tudo.</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Por que as pessoas gostam do Sonari</h2>
+          <p class="mt-4 text-slate-400">Pequenas coisas que deixam a experiência de ouvir melhor.</p>
         </div>
 
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <article class="benefit-card" data-reveal>
-            <span class="icon-badge bg-gradient-to-br from-brand to-brand-light"><i class="fa-solid fa-volume-high"></i></span>
-            <h3 class="mt-5 font-display text-lg font-bold text-white">Som superior</h3>
-            <p class="mt-2 text-sm text-slate-400">Streaming sem perdas com equalizador adaptativo para fones, carro e caixas.</p>
+            <h3 class="mt-0 font-display text-lg font-bold text-white">Som superior</h3>
+            <p class="mt-2 text-sm text-slate-400">Som limpo e bem equilibrado, seja no fone, no carro ou na sala.</p>
           </article>
 
           <article class="benefit-card" data-reveal>
-            <span class="icon-badge bg-gradient-to-br from-accent to-brand-light"><i class="fa-solid fa-sliders"></i></span>
-            <h3 class="mt-5 font-display text-lg font-bold text-white">Playlists suas</h3>
-            <p class="mt-2 text-sm text-slate-400">Crie, misture e compartilhe playlists que se atualizam com o seu humor.</p>
+            <h3 class="mt-0 font-display text-lg font-bold text-white">Playlists suas</h3>
+            <p class="mt-2 text-sm text-slate-400">Monte playlists do seu jeito e ajuste tudo com rapidez.</p>
           </article>
 
           <article class="benefit-card" data-reveal>
-            <span class="icon-badge bg-gradient-to-br from-accent-warm to-brand"><i class="fa-solid fa-compass"></i></span>
-            <h3 class="mt-5 font-display text-lg font-bold text-white">Novos artistas</h3>
-            <p class="mt-2 text-sm text-slate-400">Um radar semanal com independentes que combinam com o que você escuta.</p>
+            <h3 class="mt-0 font-display text-lg font-bold text-white">Novos artistas</h3>
+            <p class="mt-2 text-sm text-slate-400">Descubra artistas novos que têm a ver com o que você costuma ouvir.</p>
           </article>
 
           <article class="benefit-card" data-reveal>
-            <span class="icon-badge bg-gradient-to-br from-brand-light to-accent"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-            <h3 class="mt-5 font-display text-lg font-bold text-white">Interface intuitiva</h3>
-            <p class="mt-2 text-sm text-slate-400">Tudo a um toque: busca instantânea, fila simples e modo offline.</p>
+            <h3 class="mt-0 font-display text-lg font-bold text-white">Interface intuitiva</h3>
+            <p class="mt-2 text-sm text-slate-400">Busca rápida, fila simples e tudo bem organizado para usar no dia a dia.</p>
           </article>
         </div>
       </div>
@@ -199,108 +194,39 @@
       <div class="mx-auto max-w-7xl px-6 lg:px-10">
         <div class="mx-auto max-w-2xl text-center" data-reveal>
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Funcionalidades</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Tudo o que o Sonari faz por você</h2>
+          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">O que você encontra no Sonari</h2>
         </div>
 
         <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <article class="feature-card" data-reveal>
-            <span class="feature-icon"><i class="fa-solid fa-microchip"></i></span>
             <h3 class="feature-title">Equalizador inteligente</h3>
-            <p class="feature-text">Perfis de áudio automáticos por gênero e por dispositivo conectado.</p>
+            <p class="feature-text">Ajusta o som de acordo com o tipo de música e com o aparelho que você usa.</p>
           </article>
 
           <article class="feature-card" data-reveal>
-            <span class="feature-icon"><i class="fa-solid fa-cloud-arrow-down"></i></span>
             <h3 class="feature-title">Modo offline</h3>
-            <p class="feature-text">Baixe álbuns inteiros e ouça sem internet, com a mesma fidelidade.</p>
+            <p class="feature-text">Baixe álbuns e continue ouvindo mesmo sem conexão.</p>
           </article>
 
           <article class="feature-card" data-reveal>
-            <span class="feature-icon"><i class="fa-solid fa-users"></i></span>
             <h3 class="feature-title">Sessões em grupo</h3>
-            <p class="feature-text">Convide amigos para a mesma fila e controlem a playlist em tempo real.</p>
+            <p class="feature-text">Convide amigos e deixem a fila da música no mesmo ritmo.</p>
           </article>
 
           <article class="feature-card" data-reveal>
-            <span class="feature-icon"><i class="fa-solid fa-microphone-lines"></i></span>
             <h3 class="feature-title">Letras sincronizadas</h3>
-            <p class="feature-text">Acompanhe e cante junto com letras que seguem a faixa linha a linha.</p>
+            <p class="feature-text">Veja as letras acompanhando a música em tempo real.</p>
           </article>
 
           <article class="feature-card" data-reveal>
-            <span class="feature-icon"><i class="fa-solid fa-chart-simple"></i></span>
             <h3 class="feature-title">Retrospectiva</h3>
-            <p class="feature-text">Estatísticas mensais dos seus artistas, gêneros e horários favoritos.</p>
+            <p class="feature-text">Fica de olho nos artistas, gêneros e horários mais ouvidos por você.</p>
           </article>
 
           <article class="feature-card" data-reveal>
-            <span class="feature-icon"><i class="fa-solid fa-tower-broadcast"></i></span>
             <h3 class="feature-title">Rádio infinita</h3>
-            <p class="feature-text">A partir de qualquer faixa, uma estação contínua feita para o seu gosto.</p>
+            <p class="feature-text">A partir de qualquer música, o app segue no estilo que você gosta.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Depoimentos -->
-    <section id="depoimentos" class="border-t border-white/5 py-20 lg:py-28">
-      <div class="mx-auto max-w-7xl px-6 lg:px-10">
-        <div class="mx-auto max-w-2xl text-center" data-reveal>
-          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Depoimentos</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Quem já ouve Sonari</h2>
-        </div>
-
-        <div class="mt-14 grid gap-6 md:grid-cols-3">
-          <figure class="testimonial-card" data-reveal>
-            <i class="fa-solid fa-quote-left text-2xl text-brand-light"></i>
-            <blockquote class="mt-4 text-sm leading-relaxed text-slate-300">
-              "A diferença no som com fone é absurda. Voltei a ouvir álbuns inteiros do começo ao fim."
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-3">
-              <span class="avatar bg-gradient-to-br from-brand to-accent">LM</span>
-              <span>
-                <span class="block text-sm font-semibold text-white">Larissa Moreira</span>
-                <span class="block text-xs text-slate-500">Produtora musical</span>
-              </span>
-            </figcaption>
-            <div class="mt-4 text-accent-warm" aria-label="Avaliação 5 de 5">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-          </figure>
-
-          <figure class="testimonial-card" data-reveal>
-            <i class="fa-solid fa-quote-left text-2xl text-brand-light"></i>
-            <blockquote class="mt-4 text-sm leading-relaxed text-slate-300">
-              "O radar de novos artistas virou meu programa de sexta. Descobri mais gente em um mês do que em um ano."
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-3">
-              <span class="avatar bg-gradient-to-br from-accent to-accent-warm">RC</span>
-              <span>
-                <span class="block text-sm font-semibold text-white">Rafael Campos</span>
-                <span class="block text-xs text-slate-500">Estudante</span>
-              </span>
-            </figcaption>
-            <div class="mt-4 text-accent-warm" aria-label="Avaliação 5 de 5">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-          </figure>
-
-          <figure class="testimonial-card" data-reveal>
-            <i class="fa-solid fa-quote-left text-2xl text-brand-light"></i>
-            <blockquote class="mt-4 text-sm leading-relaxed text-slate-300">
-              "As sessões em grupo salvam qualquer viagem: todo mundo coloca música sem passar o celular."
-            </blockquote>
-            <figcaption class="mt-6 flex items-center gap-3">
-              <span class="avatar bg-gradient-to-br from-brand-light to-brand">AS</span>
-              <span>
-                <span class="block text-sm font-semibold text-white">Ana Souza</span>
-                <span class="block text-xs text-slate-500">Designer</span>
-              </span>
-            </figcaption>
-            <div class="mt-4 text-accent-warm" aria-label="Avaliação 4 de 5">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-            </div>
-          </figure>
         </div>
       </div>
     </section>
@@ -310,13 +236,13 @@
       <div class="mx-auto grid max-w-5xl items-center gap-12 px-6 lg:grid-cols-2 lg:px-10">
         <div data-reveal>
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-accent">Fique por dentro</p>
-          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Receba novidades e acesso antecipado</h2>
+          <h2 class="mt-3 font-display text-3xl font-extrabold text-white sm:text-4xl">Receba novidades antes de todo mundo</h2>
           <p class="mt-4 text-slate-400">
-            Deixe seu e-mail e avisamos sobre novos recursos, lançamentos e playlists exclusivas do Sonari.
+            Deixe seu e-mail e fique por dentro de lançamentos, novidades e playlists exclusivas do Sonari.
           </p>
           <ul class="mt-6 space-y-3 text-sm text-slate-400">
-            <li><i class="fa-solid fa-circle-check mr-2 text-accent"></i> Sem spam, só o essencial</li>
-            <li><i class="fa-solid fa-circle-check mr-2 text-accent"></i> Cancele quando quiser</li>
+            <li>Sem spam, só o essencial</li>
+            <li>Cancele quando quiser</li>
           </ul>
         </div>
 
@@ -339,11 +265,11 @@
           </div>
 
           <button type="submit" class="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand to-accent px-6 py-3.5 font-semibold text-white shadow-lg shadow-brand/30 transition hover:scale-[1.02]">
-            <i class="fa-solid fa-paper-plane"></i> Quero receber novidades
+            Quero receber novidades
           </button>
 
           <p id="form-success" class="mt-4 hidden rounded-lg border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-accent" role="status">
-            <i class="fa-solid fa-circle-check mr-1"></i> Tudo certo! Em breve você recebe nossas novidades.
+            Tudo certo! Em breve você recebe nossas novidades.
           </p>
         </form>
       </div>
@@ -354,12 +280,9 @@
     <div class="mx-auto grid max-w-7xl gap-10 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-10">
       <div>
         <a href="#hero" class="flex items-center gap-2 font-display text-lg font-extrabold text-white">
-          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-accent">
-            <i class="fa-solid fa-headphones text-sm text-white"></i>
-          </span>
           Sonari
         </a>
-        <p class="mt-4 max-w-xs text-sm text-slate-500">Sua música, sua forma. Streaming de alta fidelidade para todo lugar.</p>
+        <p class="mt-4 max-w-xs text-sm text-slate-500">Música pra acompanhar o dia inteiro, com som melhor e uma experiência mais simples.</p>
       </div>
 
       <div>
@@ -367,7 +290,6 @@
         <ul class="mt-4 space-y-2 text-sm text-slate-500">
           <li><a class="hover:text-accent" href="#beneficios">Benefícios</a></li>
           <li><a class="hover:text-accent" href="#funcionalidades">Funcionalidades</a></li>
-          <li><a class="hover:text-accent" href="#depoimentos">Depoimentos</a></li>
           <li><a class="hover:text-accent" href="#contato">Contato</a></li>
         </ul>
       </div>
@@ -375,19 +297,19 @@
       <div>
         <h3 class="font-display text-sm font-bold uppercase tracking-wider text-white">Contato</h3>
         <ul class="mt-4 space-y-2 text-sm text-slate-500">
-          <li><i class="fa-solid fa-envelope mr-2 text-brand-light"></i> contato@sonari.app</li>
-          <li><i class="fa-solid fa-phone mr-2 text-brand-light"></i> (11) 12345-5678</li>
-          <li><i class="fa-solid fa-location-dot mr-2 text-brand-light"></i> Paulista, SP</li>
+          <li>contato@sonari.app</li>
+          <li>(11) 12345-5678</li>
+          <li>Paulista, SP</li>
         </ul>
       </div>
 
-      <div>     
+      <div>
         <h3 class="font-display text-sm font-bold uppercase tracking-wider text-white">Redes sociais</h3>
-        <div class="mt-4 flex gap-3">
-          <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="social-link" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-          <a href="#" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-          <a href="#" class="social-link" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+        <div class="mt-4 flex gap-3 text-sm text-slate-300">
+          <a href="#" class="hover:text-accent">Instagram</a>
+          <a href="#" class="hover:text-accent">X</a>
+          <a href="#" class="hover:text-accent">YouTube</a>
+          <a href="#" class="hover:text-accent">Spotify</a>
         </div>
         <a href="#" class="mt-5 inline-block text-sm text-slate-500 hover:text-accent">Política de Privacidade</a>
       </div>
@@ -399,7 +321,7 @@
   </footer>
 
   <a id="back-to-top" href="#hero" class="fixed bottom-6 right-6 z-40 grid h-11 w-11 translate-y-4 place-items-center rounded-full bg-gradient-to-r from-brand to-accent text-white opacity-0 shadow-lg transition-all duration-300" aria-label="Voltar ao topo">
-    <i class="fa-solid fa-arrow-up"></i>
+    Topo
   </a>
 
   <script src="assets/js/main.js"></script>
