@@ -91,10 +91,61 @@
   const equalizer = document.getElementById('equalizer');
   const progressBar = document.getElementById('progress-bar');
   const currentTime = document.getElementById('current-time');
+  const audio = document.getElementById('demo-audio');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const totalTime = document.getElementById('total-time');
+  const trackTitle = document.getElementById('track-title');
+  const trackArtist = document.getElementById('track-artist');
 
-  const TRACK_SECONDS = 216; // 03:36
-  let elapsed = 72; // 01:12
-  let timer = null;
+  // Playlist (adapte caminhos se mover os arquivos)
+  const playlist = [
+    {
+      src: 'assets/sound/fassounds-escape-your-love-upbeat-fashion-pop-dance-412230.mp3',
+      title: 'Escape Your Love',
+      artist: 'Fassounds'
+    }
+  ];
+  let currentIndex = 0;
+
+  function loadTrack(index) {
+    const item = playlist[index];
+    if (!item) return;
+    audio.src = item.src;
+    trackTitle.textContent = item.title;
+    trackArtist.textContent = item.artist;
+    audio.load();
+  }
+
+  function updateTotalTime() {
+    if (isFinite(audio.duration) && audio.duration > 0) {
+      totalTime.textContent = formatTime(Math.floor(audio.duration));
+    } else {
+      totalTime.textContent = '00:00';
+    }
+  }
+
+  prevBtn.addEventListener('click', function () {
+    if (playlist.length === 0) return;
+    currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+    loadTrack(currentIndex);
+    audio.play().catch(() => {});
+  });
+
+  nextBtn.addEventListener('click', function () {
+    if (playlist.length === 0) return;
+    currentIndex = (currentIndex + 1) % playlist.length;
+    loadTrack(currentIndex);
+    audio.play().catch(() => {});
+  });
+
+  audio.addEventListener('loadedmetadata', function () {
+    renderProgress();
+    updateTotalTime();
+  });
+
+  // load initial track
+  loadTrack(currentIndex);
 
   function formatTime(totalSeconds) {
     const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
@@ -103,30 +154,37 @@
   }
 
   function renderProgress() {
-    progressBar.style.width = (elapsed / TRACK_SECONDS) * 100 + '%';
-    currentTime.textContent = formatTime(elapsed);
+    const dur = isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 0;
+    const time = isFinite(audio.currentTime) ? audio.currentTime : 0;
+    progressBar.style.width = dur > 0 ? (time / dur) * 100 + '%' : '0%';
+    currentTime.textContent = formatTime(Math.floor(time));
   }
 
+  // Toggle play/pause using the real audio element
   playBtn.addEventListener('click', function () {
-    const stopped = !equalizer.classList.toggle('is-playing');
-
-    if (stopped) {
-      clearInterval(timer);
-      timer = null;
-      playIcon.className = 'fa-solid fa-play';
-      playBtn.setAttribute('aria-pressed', 'false');
-      return;
-    }
-
-    playIcon.className = 'fa-solid fa-pause';
-    playBtn.setAttribute('aria-pressed', 'true');
-    timer = setInterval(function () {
-      elapsed = (elapsed + 1) % TRACK_SECONDS;
-      renderProgress();
-    }, 1000);
+    if (!audio) return;
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
   });
 
-  renderProgress();
+  // Keep UI in sync with audio state
+  audio.addEventListener('play', function () {
+    playIcon.className = 'fa-solid fa-pause';
+    playBtn.setAttribute('aria-pressed', 'true');
+    equalizer.classList.add('is-playing');
+  });
+
+  audio.addEventListener('pause', function () {
+    playIcon.className = 'fa-solid fa-play';
+    playBtn.setAttribute('aria-pressed', 'false');
+    equalizer.classList.remove('is-playing');
+  });
+
+  audio.addEventListener('timeupdate', renderProgress);
+  audio.addEventListener('loadedmetadata', renderProgress);
+
+  // initialize display if audio metadata is already available
+  if (audio && audio.readyState >= 1) renderProgress();
 
   /* ---------- Formulário de contato ---------- */
   const form = document.getElementById('contact-form');

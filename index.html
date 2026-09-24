@@ -82,7 +82,7 @@
       <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:px-10">
         <div data-reveal>
           <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-accent">
-            <i class="fa-solid fa-wave-square"></i> Áudio sem perdas em até 24-bit
+            <i class="fa-solid fa-wave-square"></i> Áudio sem perdas — qualidade superior
           </span>
 
           <h1 class="mt-6 font-display text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -90,8 +90,7 @@
           </h1>
 
           <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg">
-            Um streaming pensado para quem escuta de verdade: som de alta fidelidade, playlists que
-            aprendem com você e um radar de novos artistas que combina com o seu gosto.
+            Música com alta fidelidade, playlists criadas para você e um radar de novos artistas.
           </p>
 
           <div class="mt-9 flex flex-wrap items-center gap-4">
@@ -128,28 +127,30 @@
               <i class="fa-solid fa-ellipsis"></i>
             </div>
 
+            <!-- Áudio de demonstração -->
+            <audio id="demo-audio" src="assets/sound/fassounds-escape-your-love-upbeat-fashion-pop-dance-412230.mp3" preload="metadata"></audio>
             <div class="mt-4 grid h-52 place-items-center rounded-2xl bg-gradient-to-br from-brand via-brand-light to-accent">
               <div id="equalizer" class="flex items-end gap-1.5" aria-hidden="true">
                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
               </div>
             </div>
 
-            <h2 class="mt-5 font-display text-lg font-bold text-white">Ondas de Neon</h2>
-            <p class="text-sm text-slate-400">Coletivo Sonari</p>
+            <h2 id="track-title" class="mt-5 font-display text-lg font-bold text-white">Ondas de Neon</h2>
+            <p id="track-artist" class="text-sm text-slate-400">Coletivo Sonari</p>
 
             <div class="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
               <div id="progress-bar" class="h-full w-1/3 rounded-full bg-gradient-to-r from-brand to-accent"></div>
             </div>
             <div class="mt-2 flex justify-between text-[11px] text-slate-500">
-              <span id="current-time">01:12</span><span>03:36</span>
+              <span id="current-time">00:00</span><span id="total-time">00:00</span>
             </div>
 
             <div class="mt-5 flex items-center justify-center gap-7 text-white">
-              <button class="text-slate-400 transition hover:text-white" aria-label="Faixa anterior"><i class="fa-solid fa-backward-step"></i></button>
-              <button id="play-btn" class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-brand to-accent shadow-lg shadow-brand/40 transition hover:scale-105" aria-label="Reproduzir demonstração" aria-pressed="false">
+              <button id="prev-btn" class="text-slate-400 transition hover:text-white" aria-label="Faixa anterior"><i class="fa-solid fa-backward-step"></i></button>
+              <button id="play-btn" class="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-brand to-accent shadow-lg shadow-brand/40 transition hover:scale-105" aria-label="Reproduzir" aria-pressed="false">
                 <i id="play-icon" class="fa-solid fa-play"></i>
               </button>
-              <button class="text-slate-400 transition hover:text-white" aria-label="Próxima faixa"><i class="fa-solid fa-forward-step"></i></button>
+              <button id="next-btn" class="text-slate-400 transition hover:text-white" aria-label="Próxima faixa"><i class="fa-solid fa-forward-step"></i></button>
             </div>
           </div>
         </div>
@@ -375,12 +376,12 @@
         <h3 class="font-display text-sm font-bold uppercase tracking-wider text-white">Contato</h3>
         <ul class="mt-4 space-y-2 text-sm text-slate-500">
           <li><i class="fa-solid fa-envelope mr-2 text-brand-light"></i> contato@sonari.app</li>
-          <li><i class="fa-solid fa-phone mr-2 text-brand-light"></i> (85) 90000-0000</li>
-          <li><i class="fa-solid fa-location-dot mr-2 text-brand-light"></i> Fortaleza, CE</li>
+          <li><i class="fa-solid fa-phone mr-2 text-brand-light"></i> (11) 12345-5678</li>
+          <li><i class="fa-solid fa-location-dot mr-2 text-brand-light"></i> Paulista, SP</li>
         </ul>
       </div>
 
-      <div>
+      <div>     
         <h3 class="font-display text-sm font-bold uppercase tracking-wider text-white">Redes sociais</h3>
         <div class="mt-4 flex gap-3">
           <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
