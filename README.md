@@ -63,4 +63,9 @@ Link publicado: https://beatrizaalbuquerque.github.io/sonarimusic/
 
 ## Integrantes do grupo
 
-- Beatriz Albuquerque
+1ESPX
+Beatriz Albuquerque 
+Nicole Couto
+Leticia Couto
+Robert Josino
+Ryan Maick
